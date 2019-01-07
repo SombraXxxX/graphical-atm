@@ -1,11 +1,15 @@
 package view;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import controller.ViewManager;
 
@@ -13,6 +17,11 @@ import controller.ViewManager;
 public class CreateView extends JPanel implements ActionListener {
 	
 	private ViewManager manager;		// manages interactions between the views, model, and database
+	private JTextField fName;
+	private JTextField lName;
+	private JTextField Address;
+	private JTextField City;
+	private JTextField PhoneNum;
 	
 	/**
 	 * Constructs an instance (or object) of the CreateView class.
@@ -34,14 +43,14 @@ public class CreateView extends JPanel implements ActionListener {
 	 */
 	
 	private void initialize() {
+		this.setLayout(null);
 		
-		// TODO
-		//
-		// this is a placeholder for this view and should be removed once you start
-		// building the CreateView.
-		
-		this.add(new javax.swing.JLabel("CreateView", javax.swing.SwingConstants.CENTER));
-		
+		initfName();
+		initlName();
+		initPhoneNum();
+		initAddress();
+		initCity();
+
 		// TODO
 		//
 		// this is where you should build the CreateView (i.e., all the components that
@@ -51,10 +60,85 @@ public class CreateView extends JPanel implements ActionListener {
 		// positioning your components.
 	}
 	
+	private void initPhoneNum() {
+		JLabel label = new JLabel("Phone Number:", SwingConstants.RIGHT);
+		label.setBounds(70, 150, 125, 35);
+		label.setLabelFor(PhoneNum);
+		label.setFont(new Font("DialogInput", Font.BOLD, 14));
+		
+		PhoneNum = new JTextField(20);
+		PhoneNum.setBounds(205, 150, 75, 35);
+		this.add(label);
+		this.add(PhoneNum);
+//		PhoneNum = new JTextField(20);
+//		PhoneNum.setBounds(205, 150, 75, 35);
+//		this.add(label);
+//		this.add(PhoneNum);
+//		PhoneNum = new JTextField(20);
+//		PhoneNum.setBounds(205, 150, 75, 35);
+//		this.add(label);
+//		this.add(PhoneNum);	
+	}
+
+	private void initlName() {
+		JLabel label = new JLabel("Last Name:", SwingConstants.RIGHT);
+		label.setBounds(70,100,125,35);
+		label.setLabelFor(lName);
+		label.setFont(new Font("DialogInput", Font.BOLD, 14));
+		
+		lName = new JTextField(20);
+		lName.setBounds(205, 100, 200, 35);
+		
+		this.add(label);
+		this.add(lName);
+		
+	}
+
+	private void initfName() {
+		JLabel label = new JLabel("First Name:", SwingConstants.RIGHT);
+		label.setBounds(70,50,125,35);
+		label.setLabelFor(lName);
+		label.setFont(new Font("DialogInput", Font.BOLD, 14));
+		
+		lName = new JTextField(20);
+		lName.setBounds(205, 50, 200, 35);
+		
+		this.add(label);
+		this.add(lName);// TODO Auto-generated method stub
+		
+	}
+	private void initAddress() {
+		JLabel label = new JLabel("Street Address:", SwingConstants.RIGHT);
+		label.setBounds(70,200,125,35);
+		label.setLabelFor(Address);
+		label.setFont(new Font("DialogInput", Font.BOLD, 14));
+		
+		Address = new JTextField(20);
+		Address.setBounds(205, 200, 200, 35);
+		
+		
+		this.add(label);
+		this.add(Address);// TODO Auto-generated method stub
+		
+	}
+	private void initCity() {
+		JLabel label = new JLabel("City:", SwingConstants.RIGHT);
+		label.setBounds(70,235,125,35);
+		label.setLabelFor(City);
+		label.setFont(new Font("DialogInput", Font.BOLD, 14));
+		
+		City = new JTextField(20);
+		City.setBounds(205, 239, 200, 35);
+		
+		
+		this.add(label);
+		this.add(City);// TODO Auto-generated method stub
+		
+	}
 	/*
 	 * CreateView is not designed to be serialized, and attempts to serialize will throw an IOException.
 	 * 
-	 * @param oos
+	 * @param 
 	 * @throws IOException
 	 */
 	
