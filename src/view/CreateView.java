@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -21,8 +22,11 @@ public class CreateView extends JPanel implements ActionListener {
 	private JTextField lName;
 	private JTextField Address;
 	private JTextField City;
+	private JTextField dob;
 	private JTextField PhoneNum;
-	
+	private JTextField Zipcode;
+	private JButton CreateButton;
+	private JButton returnButton;
 	/**
 	 * Constructs an instance (or object) of the CreateView class.
 	 * 
@@ -50,7 +54,10 @@ public class CreateView extends JPanel implements ActionListener {
 		initPhoneNum();
 		initAddress();
 		initCity();
-
+		initZipcode();
+		initCreateButton();
+		initreturnButton();
+		initdob();
 		// TODO
 		//
 		// this is where you should build the CreateView (i.e., all the components that
@@ -60,6 +67,25 @@ public class CreateView extends JPanel implements ActionListener {
 		// positioning your components.
 	}
 	
+	private void initreturnButton() {
+		returnButton = new JButton("Return");
+		returnButton.setBounds(5, 5, 50, 50);
+		returnButton.addActionListener(this);
+
+		
+		this.add(returnButton);
+		
+	}
+
+	private void initCreateButton() {
+		// TODO Auto-generated method stub
+		CreateButton = new JButton("Create Account");
+		CreateButton.setBounds(175, 420, 200, 35);
+		CreateButton.addActionListener(this);
+		
+		this.add(CreateButton);
+	}
+
 	private void initPhoneNum() {
 		JLabel label = new JLabel("Phone Number:", SwingConstants.RIGHT);
 		label.setBounds(70, 150, 125, 35);
@@ -135,6 +161,34 @@ public class CreateView extends JPanel implements ActionListener {
 		this.add(City);// TODO Auto-generated method stub
 		
 	}
+	private void initZipcode() {
+		JLabel label = new JLabel("Zipcode:", SwingConstants.RIGHT);
+		label.setBounds(70,275,125,35);
+		label.setLabelFor(Zipcode);
+		label.setFont(new Font("DialogInput", Font.BOLD, 14));
+		
+		Zipcode = new JTextField(20);
+		Zipcode.setBounds(205, 275, 200, 35);
+		
+		
+		this.add(label);
+		this.add(Zipcode);// TODO Auto-generated method stub
+		
+	}
+	private void initDobField() {
+		JLabel label = new JLabel("Date of Birth", SwingConstants.RIGHT);
+		label.setBounds(100, 300, 95, 35);
+
+	    try {
+			MaskFormatter dateFormat = new MaskFormatter("##/##/####");
+			dateFormat.setPlaceholderCharacter('_');
+			dob = new JFormattedTextField(dateFormat);
+		} catch (ParseException e) {
+			dob.setText("");
+		}
+		dob.setBounds(205, 300, 200, 35);
+	}
+
 	/*
 	 * CreateView is not designed to be serialized, and attempts to serialize will throw an IOException.
 	 * 
