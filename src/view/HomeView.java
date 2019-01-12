@@ -137,19 +137,6 @@ public class HomeView extends JPanel implements ActionListener {
 		//
 		// feel free to use my action listener in LoginView.java as an example.
 	}
-	
-	public void deposit() {
-
-	}
-	
-	public void withdraw() {
-	
-	}
-		
-	public void Transfer() {
-	
-	}
-		
 	public void AccountMessage() {
 		AccountMessage.setText(manager.getAccount().getUser().getFirstName() + " " + manager.getAccount().getUser().getLastName() + "; " + manager.getAccount().getAccountNumber() + "; " + manager.getAccount().getBalance());
 	}
