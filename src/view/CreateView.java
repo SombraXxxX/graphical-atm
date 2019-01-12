@@ -11,22 +11,27 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.JPasswordField;
+import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
 
 import controller.ViewManager;
-
+import com.toedter.calendar;
 @SuppressWarnings("serial")
 public class CreateView extends JPanel implements ActionListener {
 	
 	private ViewManager manager;		// manages interactions between the views, model, and database
-	private JTextField fName;
-	private JTextField lName;
+	private JTextField fName;	// first name
+	private JTextField lName;	// last name
 	private JTextField Address;
 	private JTextField City;
-	private JTextField dob;
+	private JComboBox State;
+	private JDateChooser dob;
 	private JTextField PhoneNum;
 	private JTextField Zipcode;
 	private JButton CreateButton;
 	private JButton returnButton;
+	private JPasswordField Pin;
 	/**
 	 * Constructs an instance (or object) of the CreateView class.
 	 * 
@@ -58,6 +63,9 @@ public class CreateView extends JPanel implements ActionListener {
 		initCreateButton();
 		initreturnButton();
 		initdob();
+		initState();
+		initPin();
+		
 		// TODO
 		//
 		// this is where you should build the CreateView (i.e., all the components that
@@ -175,20 +183,50 @@ public class CreateView extends JPanel implements ActionListener {
 		this.add(Zipcode);// TODO Auto-generated method stub
 		
 	}
-	private void initDobField() {
-		JLabel label = new JLabel("Date of Birth", SwingConstants.RIGHT);
-		label.setBounds(100, 300, 95, 35);
+	
+	private void initState() {
+		JLabel label = new JLabel("State", SwingConstants.RIGHT);
+		label.setBounds(70, 300, 95, 35);
+		label.setLabelFor(State);
+		label.setFont(new Font("DialogInput", Font.BOLD, 14));
 
-	    try {
-			MaskFormatter dateFormat = new MaskFormatter("##/##/####");
-			dateFormat.setPlaceholderCharacter('_');
-			dob = new JFormattedTextField(dateFormat);
-		} catch (ParseException e) {
-			dob.setText("");
-		}
-		dob.setBounds(205, 300, 200, 35);
+		String[] listStates = {"AK","AL","AR","AZ","CA","CO","CT","DC","DE",
+				"FL","GA","GU","HI","IA","ID", "IL","IN","KS","KY","LA","MA",
+				"MD","ME","MH","MI","MN","MO","MS","MT","NC","ND","NE","NH",
+				"NJ","NM","NV","NY", "OH","OK","OR","PA","PR","PW","RI","SC",
+				"SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"};
+
+		
+		State = new JComboBox(listStates);
+		State.setBounds(205, 300, 200, 35);
+		
+		this.add(label);
+		this.add(State);
 	}
-
+	
+	private void initdob() {
+		JLabel label = new JLabel("Date of Birth", SwingConstants.RIGHT);
+		label.setBounds(70, 365, 95, 35);
+		label.setLabelFor(dob);
+		label.setFont(new Font("DialogInput", Font.BOLD, 14));
+		
+		dob = new JDateChooser();
+		dob setBounds(205, 365, 200, 35);
+		
+		this.add(label);
+		this.add(dob);
+	}
+	private void initPin() {
+		JLabel label = new JLabel("Pin:", SwingConstants.RIGHT);
+		label.setBounds(70, 325, 95, 35);
+		label.setLabelFor(Pin);
+		label.setFont(new Font("DialogInput", Font.BOLD, 14));
+		Pin = new JPasswordField(20);
+		Pin.setBounds(205, 325, 200, 35);
+		
+		this.add(label);
+		this.add(Pin);
+	}
 	/*
 	 * CreateView is not designed to be serialized, and attempts to serialize will throw an IOException.
 	 * 
@@ -210,7 +248,14 @@ public class CreateView extends JPanel implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		if (source.equals(loginButton)) {
+				manager.login(accountField.getText(), pinField.getPassword());
+		} else if (source.equals(createButton)) {
+				manager.switchTo(ATM.CREATE_VIEW);
+		} else if (source.equals(powerButton)) {
+				manager.shutdown();
+		} else {
+			System.err.println("ERROR: Action command not found (" + e.getActionCommand() + ")");
 		// TODO
 		//
 		// this is where you'll setup your action listener, which is responsible for
@@ -218,5 +263,6 @@ public class CreateView extends JPanel implements ActionListener {
 		// user clicking a button, typing in a textfield, etc.).
 		//
 		// feel free to use my action listener in LoginView.java as an example.
+		}
 	}
 }
