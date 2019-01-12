@@ -67,7 +67,7 @@ public class HomeView extends JPanel implements ActionListener {
 	private void initAccountMessage() {
 		AccountMessage = new JLabel("", SwingConstants.CENTER);
 		AccountMessage.setBounds(50,50,500,50);
-		this.add(accountMessage);
+		this.add(AccountMessage);
 	}
 	
 	private void initWithdrawButton () {
@@ -80,6 +80,8 @@ public class HomeView extends JPanel implements ActionListener {
 	private void initDepositButton() {
 		DepositButton = new JButton("Deposit");
 		DepositButton.setBounds(50,100,100,100);
+		DepositButton.addActionListen(this);
+		this.add(DepositButton);
 	}
 	
 	private void initTransferButton() {
@@ -124,5 +126,8 @@ public class HomeView extends JPanel implements ActionListener {
 		// user clicking a button, typing in a textfield, etc.).
 		//
 		// feel free to use my action listener in LoginView.java as an example.
+	}
+	public void AccountMessage() {
+		AccountMessage.setText(manager.getAccount().getUser().getFirstName() + " " + manager.getAccount().getUser().getLastName() + "; " + manager.getAccount().getAccountNumber() + "; " + manager.getAccount().getBalance());
 	}
 }
