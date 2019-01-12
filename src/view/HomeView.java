@@ -118,7 +118,17 @@ public class HomeView extends JPanel implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		Object source = e.getSource();
+		if (source.equals(LogoutButton)) {
+			manager.shutdown();
+		} else if (source.equals(DepositButton)) {
+			manager.switchTo(ATM.DESPOSIT_VIEW);
+		} else if (source.equals(WithdrawButton)) {
+			manager.switchTo(ATM.WITHDRAW_VIEW);
+		} else if (source.equals(TransferButton)) {
+			manager.switchTo(ATM.TRANSFER_VIEW);
+		} else {
+		System.err.println("ERROR: Action command not found (" + e.getActionCommand() + ")");
 		// TODO
 		//
 		// this is where you'll setup your action listener, which is responsible for
@@ -127,6 +137,19 @@ public class HomeView extends JPanel implements ActionListener {
 		//
 		// feel free to use my action listener in LoginView.java as an example.
 	}
+	
+	public void deposit() {
+
+	}
+	
+	public void withdraw() {
+	
+	}
+		
+	public void Transfer() {
+	
+	}
+		
 	public void AccountMessage() {
 		AccountMessage.setText(manager.getAccount().getUser().getFirstName() + " " + manager.getAccount().getUser().getLastName() + "; " + manager.getAccount().getAccountNumber() + "; " + manager.getAccount().getBalance());
 	}
