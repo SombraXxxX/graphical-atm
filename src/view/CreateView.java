@@ -5,19 +5,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.text.MaskFormatter;
+
+import com.toedter.calendar.JDateChooser;
+
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JRadioButton;
 
 import controller.ViewManager;
-import com.toedter.calendar;
-@SuppressWarnings("serial")
+
 public class CreateView extends JPanel implements ActionListener {
 	
 	private ViewManager manager;		// manages interactions between the views, model, and database
@@ -77,7 +82,7 @@ public class CreateView extends JPanel implements ActionListener {
 	
 	private void initreturnButton() {
 		returnButton = new JButton("Return");
-		returnButton.setBounds(5, 5, 50, 50);
+		returnButton.setBounds(5, 5, 75, 50);
 		returnButton.addActionListener(this);
 
 		
@@ -96,32 +101,30 @@ public class CreateView extends JPanel implements ActionListener {
 
 	private void initPhoneNum() {
 		JLabel label = new JLabel("Phone Number:", SwingConstants.RIGHT);
-		label.setBounds(70, 150, 125, 35);
-		label.setLabelFor(PhoneNum);
-		label.setFont(new Font("DialogInput", Font.BOLD, 14));
+		label.setBounds(70, 125, 125, 35);
 		
-		PhoneNum = new JTextField(20);
-		PhoneNum.setBounds(205, 150, 75, 35);
+	    try {
+			MaskFormatter phoneFormat = new MaskFormatter("(###)-###-####");
+			phoneFormat.setPlaceholderCharacter('_');
+			PhoneNum = new JFormattedTextField(phoneFormat);
+		} catch (ParseException e) {
+			PhoneNum.setText("");
+		}
+		PhoneNum.setBounds(205, 125, 100, 35);
 		this.add(label);
 		this.add(PhoneNum);
-//		PhoneNum = new JTextField(20);
-//		PhoneNum.setBounds(205, 150, 75, 35);
-//		this.add(label);
-//		this.add(PhoneNum);
-//		PhoneNum = new JTextField(20);
-//		PhoneNum.setBounds(205, 150, 75, 35);
-//		this.add(label);
-//		this.add(PhoneNum);	
+
+
 	}
 
 	private void initlName() {
 		JLabel label = new JLabel("Last Name:", SwingConstants.RIGHT);
-		label.setBounds(70,100,125,35);
+		label.setBounds(70,80,125,35);
 		label.setLabelFor(lName);
 		label.setFont(new Font("DialogInput", Font.BOLD, 14));
 		
 		lName = new JTextField(20);
-		lName.setBounds(205, 100, 200, 35);
+		lName.setBounds(205, 80, 200, 35);
 		
 		this.add(label);
 		this.add(lName);
@@ -130,12 +133,12 @@ public class CreateView extends JPanel implements ActionListener {
 
 	private void initfName() {
 		JLabel label = new JLabel("First Name:", SwingConstants.RIGHT);
-		label.setBounds(70,50,125,35);
+		label.setBounds(70,30,125,35);
 		label.setLabelFor(lName);
-		label.setFont(new Font("DialogInput", Font.BOLD, 14));
+		label.setFont(new Font("DialogInput", Font.BOLD,  14));
 		
 		lName = new JTextField(20);
-		lName.setBounds(205, 50, 200, 35);
+		lName.setBounds(205, 30, 200, 35);
 		
 		this.add(label);
 		this.add(lName);// TODO Auto-generated method stub
@@ -143,12 +146,12 @@ public class CreateView extends JPanel implements ActionListener {
 	}
 	private void initAddress() {
 		JLabel label = new JLabel("Street Address:", SwingConstants.RIGHT);
-		label.setBounds(70,200,125,35);
+		label.setBounds(70,165,125,35);
 		label.setLabelFor(Address);
 		label.setFont(new Font("DialogInput", Font.BOLD, 14));
 		
 		Address = new JTextField(20);
-		Address.setBounds(205, 200, 200, 35);
+		Address.setBounds(205, 165, 200, 35);
 		
 		
 		this.add(label);
@@ -157,12 +160,12 @@ public class CreateView extends JPanel implements ActionListener {
 	}
 	private void initCity() {
 		JLabel label = new JLabel("City:", SwingConstants.RIGHT);
-		label.setBounds(70,235,125,35);
+		label.setBounds(70,205,125,35);
 		label.setLabelFor(City);
 		label.setFont(new Font("DialogInput", Font.BOLD, 14));
 		
 		City = new JTextField(20);
-		City.setBounds(205, 239, 200, 35);
+		City.setBounds(205, 205, 200, 35);
 		
 		
 		this.add(label);
@@ -171,12 +174,12 @@ public class CreateView extends JPanel implements ActionListener {
 	}
 	private void initZipcode() {
 		JLabel label = new JLabel("Zipcode:", SwingConstants.RIGHT);
-		label.setBounds(70,275,125,35);
+		label.setBounds(70,245,125,35);
 		label.setLabelFor(Zipcode);
 		label.setFont(new Font("DialogInput", Font.BOLD, 14));
 		
 		Zipcode = new JTextField(20);
-		Zipcode.setBounds(205, 275, 200, 35);
+		Zipcode.setBounds(205, 245, 200, 35);
 		
 		
 		this.add(label);
@@ -186,7 +189,7 @@ public class CreateView extends JPanel implements ActionListener {
 	
 	private void initState() {
 		JLabel label = new JLabel("State", SwingConstants.RIGHT);
-		label.setBounds(70, 300, 95, 35);
+		label.setBounds(70, 285, 95, 35);
 		label.setLabelFor(State);
 		label.setFont(new Font("DialogInput", Font.BOLD, 14));
 
@@ -198,20 +201,20 @@ public class CreateView extends JPanel implements ActionListener {
 
 		
 		State = new JComboBox(listStates);
-		State.setBounds(205, 300, 200, 35);
+		State.setBounds(205, 285, 200, 35);
 		
 		this.add(label);
 		this.add(State);
 	}
 	
 	private void initdob() {
-		JLabel label = new JLabel("Date of Birth", SwingConstants.RIGHT);
+		JLabel label = new JLabel("DOB: ", SwingConstants.RIGHT);
 		label.setBounds(70, 365, 95, 35);
 		label.setLabelFor(dob);
 		label.setFont(new Font("DialogInput", Font.BOLD, 14));
 		
 		dob = new JDateChooser();
-		dob setBounds(205, 365, 200, 35);
+		dob.setBounds(205, 365, 200, 35);
 		
 		this.add(label);
 		this.add(dob);
@@ -248,21 +251,20 @@ public class CreateView extends JPanel implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (source.equals(loginButton)) {
-				manager.login(accountField.getText(), pinField.getPassword());
-		} else if (source.equals(createButton)) {
-				manager.switchTo(ATM.CREATE_VIEW);
-		} else if (source.equals(powerButton)) {
-				manager.shutdown();
-		} else {
-			System.err.println("ERROR: Action command not found (" + e.getActionCommand() + ")");
-		// TODO
+		Object source = e.getSource();
+		if (source.equals(CreateButton)) {
+			
+			manager.switchTo(ATM.HOME_VIEW);
+	} else if (source.equals(returnButton)) {
+			manager.switchTo(ATM.LOGIN_VIEW);
+	} else {
+		System.err.println("ERROR: Action command not found (" + e.getActionCommand() + ")");
 		//
 		// this is where you'll setup your action listener, which is responsible for
 		// responding to actions the user might take in this view (an action can be a
 		// user clicking a button, typing in a textfield, etc.).
 		//
 		// feel free to use my action listener in LoginView.java as an example.
-		}
+	}
 	}
 }
